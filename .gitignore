@@ -1,0 +1,6 @@
+node_modules
+
+# Folders created with gulp
+app/js
+app/css
+dist
