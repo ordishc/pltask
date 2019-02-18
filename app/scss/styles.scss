@@ -1,8 +1,99 @@
-// styles.scss
-.testing {
-    width: percentage(5/7);
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5em;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
 }
 
-body {
-    background-color: pink;
+.player-card {
+    border: 1px solid red;
+    width: 300px;
+
+    .player-card__header {
+        background: url('/images/background-pattern.png') no-repeat 125% 100%;
+        height: 272px;
+        padding: 16px 16px 0;
+        position: relative;        
+
+        .player-card__header--inner {
+            height: 100%;
+            position: relative;
+
+            &:after {
+                content: '';
+                background: url('/images/badges_sprite.png') 0 0;
+                bottom: -50px;
+                position: absolute;
+                height: 100px;
+                right: -10px;
+                width: 100px;
+            }
+
+            .player-select {
+                -webkit-appearance: none; 
+                -moz-appearance: none;
+                appearance: none;       /* remove default arrow */
+                background: url("/images/arrow-down.png") no-repeat center right 20px;   /* add custom arrow */
+                background-color: #eaeaea;
+                border-radius: 0;
+                color: #000;
+                font-size: 1em;
+                height: 40px;
+                padding: 10px 12px 10px 10px;
+                width: 100%;
+            }
+    
+            img {
+                bottom: 0;
+                height: 210px;
+                position: absolute;
+            }   
+        }
+    }
+
+    .player-card__body {
+        background-color: #e90052;
+        color: #fff;
+        padding: 16px;
+
+        .player-name {
+            font-size: 22px;
+            font-weight: normal;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .player-position {
+            font-size: 1em;
+            font-weight: normal;
+            margin-bottom: 14px;
+            margin-top: 0;
+        }
+
+        .player-stats {
+
+            .player-stats__item {
+                background-color: #eaeaea;
+                color: #38003c;
+                padding: 12px 12px 12px 10px;
+                margin-bottom: 3px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                
+                .player-stats-desc {
+                    vertical-align: middle;
+                }
+
+                .player-stats-figure {
+                    float: right;
+                    font-size: 19px;
+                    font-weight: bold;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
 }
