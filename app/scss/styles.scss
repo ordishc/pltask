@@ -1,145 +1,139 @@
 @import 'variables';
-
-body {
-    font-family: $font-default;
-    line-height: 1.5em;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: normal;
-}
+@import 'base';
 
 .player-card {
-    width: 300px;
+	width: 300px;
+}
 
-    .player-card__header {
-        background: url('/images/background-pattern.png') no-repeat 125% 100%;
-        height: 284px;
-        padding: 16px 16px 0;
-        position: relative;        
+.player-card__header {
+	background: url('/images/background-pattern.png') no-repeat 125% 100%;
+	height: 284px;
+	padding: 16px 16px 0;
+	position: relative;
+}
 
-        .player-card__header--inner {
-            height: 100%;
-            position: relative;
+.player-card__header--inner {
+	height: 100%;
+	position: relative;
 
-            &:after {
-                // Image sprite 30% smaller than main image (100px per logo)
-                // Width of sprite 1200px therefore 30% = 840px
-                // each individual logo is 70px x 70px
-                content: '';
-                background: url(/images/badges_sprite.png) -350px -700px;
-                background-size: 840px;
-                bottom: -35px;
-                border-radius: 100%;
-                position: absolute;
-                height: 70px;
-                right: 5px;
-                width: 70px;
-            }
+	&:after {
+		// Image sprite 30% smaller than main image (100px per logo)
+		// Width of sprite 1200px therefore 30% = 840px
+		// each individual logo is 70px x 70px
+		content: '';
+		background: url(/images/badges_sprite.png) -350px -700px;
+		background-size: 840px;
+		bottom: -35px;
+		border-radius: 100%;
+		position: absolute;
+		height: 70px;
+		right: 5px;
+		width: 70px;
+	}
 
-            &.club--spurs:after {
-                background-position: -350px -700px;
-            }
-            &.club--arsenal:after {
-                background-position: -60px -57px;
-                background-size: 720px;
-                height: 65px;
-                width: 65px;
-            }
-            &.club--man-utd:after {
-                background-position: -420px -560px;
-            }
-            &.club--man-city:after {
-                background-position: -560px -490px;
-            }
-            &.club--leicester:after {
-                background-position: 0 0;
-            }
+	&.club--spurs:after {
+		background-position: -350px -700px;
+	}
+	&.club--arsenal:after {
+		background-position: -60px -57px;
+		background-size: 720px;
+		height: 65px;
+		width: 65px;
+	}
+	&.club--man-utd:after {
+		background-position: -420px -560px;
+	}
+	&.club--man-city:after {
+		background-position: -560px -490px;
+	}
+	&.club--leicester:after {
+		background-position: 0 0;
+	}
 
-            &:before {
-                // Outer white ring as images were too close to other logos
-                // hence not matching design with circular padding
-                content: '';
-                height: 80px;
-                background-color: $color-white;
-                width: 80px;
-                position: absolute;
-                right: 0;
-                bottom: -40px;
-                border-radius: 100%;
-            }
+	&:before {
+		// Outer white ring as images were too close to other logos
+		// hence not matching design with circular padding
+		content: '';
+		height: 80px;
+		background-color: $color-white;
+		width: 80px;
+		position: absolute;
+		right: 0;
+		bottom: -40px;
+		border-radius: 100%;
+	}
+}
 
-            .player-select {
-                -webkit-appearance: none; 
-                -moz-appearance: none;
-                appearance: none;       /* remove default arrow */
-                background: url("/images/arrow-down.png") no-repeat center right 20px;   /* add custom arrow */
-                background-color: $color-off-white;
-                border: none;
-                border-radius: 0;
-                color: $color-black;
-                font-size: 1em;
-                height: 40px;
-                padding: 10px 12px 10px 10px;
-                width: 100%;
-            }
-    
-            img {
-                bottom: 0;
-                height: 210px;
-                left: -10px;
-                position: absolute;
-            }   
-        }
-    }
+.player-select {
+	-webkit-appearance: none; 
+	-moz-appearance: none;
+	appearance: none; /* remove default arrow */
+	background: url("/images/arrow-down.png") no-repeat center right 20px; /* add custom arrow */
+	background-color: $color-off-white;
+	border: none;
+	border-radius: 0;
+	color: $color-black;
+	font-size: 1em;
+	height: 40px;
+	padding: 10px 12px 10px 10px;
+	width: 100%;
+}
 
-    .player-card__body {
-        background-color: $color-salmon;
-        color: $color-white;
-        padding: 16px;
 
-        .player-name {
-            font-size: 22px;
-            font-weight: normal;
-            margin-bottom: 10px;
-            margin-top: 0;
-        }
+#playerImage {
+	bottom: 0;
+	height: 210px;
+	left: -10px;
+	position: absolute;
+}
 
-        .player-position {
-            font-size: 1em;
-            font-weight: normal;
-            margin-bottom: 14px;
-            margin-top: 0;
-        }
+.player-card__body {
+	background-color: $color-salmon;
+	color: $color-white;
+	padding: 16px;
+}
 
-        .player-stats {
-            -webkit-box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
-            -moz-box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
-            box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
+.player-name {
+	font-size: 22px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	margin-top: 0;
+}
 
-            .player-stats__item {
-                background-color: $color-off-white;
-                color: $color-purple;
-                padding: 8px 12px 8px 10px;
-                margin-bottom: 2px;
-                -webkit-box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
-                -moz-box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
-                box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
+.player-position {
+	font-size: 1em;
+	font-weight: normal;
+	margin-bottom: 14px;
+	margin-top: 0;
+}
 
-                &:last-child {
-                    margin-bottom: 0;
-                }
-                
-                .player-stats-desc {
-                    vertical-align: middle;
-                }
+.player-stats {
+	-webkit-box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
+	-moz-box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
+	box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
+}
 
-                .player-stats-figure {
-                    float: right;
-                    font-size: 19px;
-                    font-weight: bold;
-                    vertical-align: middle;
-                }
-            }
-        }
-    }
+.player-stats__item {
+	background-color: $color-off-white;
+	color: $color-purple;
+	padding: 8px 12px 8px 10px;
+	margin-bottom: 2px;
+	-webkit-box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
+	-moz-box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
+	box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.player-stats-desc {
+	vertical-align: middle;
+}
+
+.player-stats-figure {
+	float: right;
+	font-size: 19px;
+	font-weight: bold;
+	vertical-align: middle;
 }
