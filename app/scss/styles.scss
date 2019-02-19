@@ -1,5 +1,7 @@
+@import 'variables';
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: $font-default;
     line-height: 1.5em;
     font-size: 16px;
     font-style: normal;
@@ -58,7 +60,7 @@ body {
                 // hence not matching design with circular padding
                 content: '';
                 height: 80px;
-                background-color: white;
+                background-color: $color-white;
                 width: 80px;
                 position: absolute;
                 right: 0;
@@ -71,10 +73,10 @@ body {
                 -moz-appearance: none;
                 appearance: none;       /* remove default arrow */
                 background: url("/images/arrow-down.png") no-repeat center right 20px;   /* add custom arrow */
-                background-color: #eaeaea;
+                background-color: $color-off-white;
                 border: none;
                 border-radius: 0;
-                color: #000;
+                color: $color-black;
                 font-size: 1em;
                 height: 40px;
                 padding: 10px 12px 10px 10px;
@@ -91,8 +93,8 @@ body {
     }
 
     .player-card__body {
-        background-color: #e90052;
-        color: #fff;
+        background-color: $color-salmon;
+        color: $color-white;
         padding: 16px;
 
         .player-name {
@@ -110,18 +112,18 @@ body {
         }
 
         .player-stats {
-            -webkit-box-shadow: 0px 0px 5px 0px rgba(168,0,59,1);
-            -moz-box-shadow: 0px 0px 5px 0px rgba(168,0,59,1);
-            box-shadow: 0px 0px 5px 0px rgba(168,0,59,1);
+            -webkit-box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
+            -moz-box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
+            box-shadow: 0px 0px 5px 0px $color-salmon-shadow;
 
             .player-stats__item {
-                background-color: #eaeaea;
-                color: #38003c;
+                background-color: $color-off-white;
+                color: $color-purple;
                 padding: 8px 12px 8px 10px;
                 margin-bottom: 2px;
-                -webkit-box-shadow: 0px 0px 8px 0px rgba(168,0,59,1);
-                -moz-box-shadow: 0px 0px 8px 0px rgba(168,0,59,1);
-                box-shadow: 0px 0px 8px 0px rgba(168,0,59,1);
+                -webkit-box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
+                -moz-box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
+                box-shadow: 0px 0px 8px 0px $color-salmon-shadow;
 
                 &:last-child {
                     margin-bottom: 0;
