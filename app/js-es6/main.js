@@ -12,26 +12,13 @@ xhr.onload = function () {
         const players = data.players;
         let player = [];
         let playerLastName = getLastName(players, player); // Array of last names
-        // let selectedPlayer;
 
         document.getElementById('playerSelect').onchange=function() {
             let selectedName = handleOnChange();
-            // let found = players.find(function(element) {
-            //     return element.player.name.last === 'Rooney';
-            // });
             let playerStats;
-
-            // console.log(playerLastName)
-            // console.log(data.includes(player));
-            // console.log(players)
-            // console.log(found);
-           
             
             playerLastName.forEach(function(name) {
-                // console.log(name)
                 if (name === selectedName) {
-                    console.log(selectedName)
-
                     playerStats = players.find(function(element) {
                         let name = element.player.name.last;
                         let nameToLower = name.toLowerCase().replace(new RegExp(/[èéêë]/g),"e");
@@ -39,8 +26,11 @@ xhr.onload = function () {
                         return nameToLower === selectedName;
                     });
 
-                    console.log(playerStats)
                     updatePlayerName(playerStats);
+                    updatePlayerPosition(playerStats);
+                    updatePlayerStats(playerStats);
+                    updatePlayerImage(playerStats);
+                    updatePlayerClub(playerStats);
                 }
             })
         };
@@ -51,7 +41,104 @@ xhr.onload = function () {
 	}
 
 	// Code that should run regardless of the request status
-    // console.log('This always runs...');
+    function getLastName(players, player) {
+        let playerLastNames;
+        let lower;
+        let nameArray = [];
+    
+        players.map(function(player) {
+            playerLastNames = player.player.name.last;
+            lower = playerLastNames.toLowerCase().replace(new RegExp(/[èéêë]/g),"e");
+    
+            nameArray.push(lower);
+        })
+    
+        return nameArray;
+    }
+    
+    function handleOnChange() {
+        const playerSelect = document.getElementById('playerSelect');
+        let selectedPlayer = playerSelect.options[playerSelect.selectedIndex].value;
+    
+        return selectedPlayer;
+    }
+    
+    function updatePlayerName(data) {
+        const playerName = document.querySelector('.player-name');
+        let firstName = data.player.name.first;
+        let lastName = data.player.name.last;
+    
+        playerName.innerHTML = `${firstName} ${lastName}`;
+    }
+    
+    function updatePlayerPosition(data) {
+        const playerPos = document.querySelector('.player-position');
+        let positionData = data.player.info.positionInfo;
+        let positionString = positionData.split(' ').slice(-1).toString(); //Strip last word from JSON data
+    
+        playerPos.innerHTML = positionString;
+    }
+
+    function updatePlayerImage(data) {
+        const playerImage = document.getElementById('playerImage');
+        let firstName = data.player.name.first.toLowerCase().replace(new RegExp(/[èéêë]/g),"e");
+        let lastName = data.player.name.last.toLowerCase().replace(new RegExp(/[èéêë]/g),"e");
+        let newImageName = `${firstName}-${lastName}`;
+        let imagePath = `images/players/${newImageName}.png`;
+
+        playerImage.src = imagePath;
+    }
+
+    function updatePlayerClub(data) {
+        const clubImage = document.querySelector('.club');
+        let playerClubFull = data.player.currentTeam.shortName;
+        let playerClubShort = playerClubFull.toLowerCase().replace(' ', '-');
+        let classList = clubImage.classList;
+        let currentClass = classList[2];
+        let newClass = `club--${playerClubShort}`;
+
+        clubImage.classList.remove(currentClass);
+        clubImage.classList.add(newClass);
+    }
+    
+    function updatePlayerStats(data) {
+        const appearances = document.getElementById('appearances');
+        const goals = document.getElementById('goals');
+        const assists = document.getElementById('assists');
+        const goalsPerMatch = document.getElementById('goalsPerMatch');
+        const passes = document.getElementById('passes');
+    
+        let appearanceStat = findStatsOfIndividual(data, 'appearances');
+        let goalsStat = findStatsOfIndividual(data, 'goals');
+        let assistStat = findStatsOfIndividual(data, 'goal_assist');
+        let goalsAverage = goalsStat / appearanceStat;
+        let passBack = findStatsOfIndividual(data, 'backward_pass');
+        let passFwd = findStatsOfIndividual(data, 'fwd_pass');
+        let minsPlayed = findStatsOfIndividual(data, 'mins_played');
+        let passTotal = passBack + passFwd;
+        let passPerMinute = passTotal / minsPlayed;
+    
+        appearances.innerHTML = appearanceStat;
+        goals.innerHTML = goalsStat;
+        assists.innerHTML = assistStat;
+        goalsPerMatch.innerHTML = goalsAverage.toFixed(2); // Round maths to 2 decimal places
+        passes.innerHTML = passPerMinute.toFixed(2) // Round maths to 2 decimal places
+    }
+    
+    function findStatsOfIndividual(data, stat) {
+        let allStatsData = data.stats;
+        let playerStats = allStatsData.find(function(stats) {
+
+            return stats.name === stat;
+        })
+    
+        // Handle error is stat doesn't exist (Eg. Mertesacker has no goal assist)
+        if (!playerStats) {
+            return 0;
+        } else {
+            return playerStats.value;
+        }
+    }
 };
 
 // Create and send a GET request
@@ -59,46 +146,3 @@ xhr.onload = function () {
 // The second argument is the endpoint URL
 xhr.open('GET', '../data/player-stats.json');
 xhr.send();
-
-function getLastName(players, player) {
-    let playerLastNames;
-    let lower;
-    let nameArray = [];
-
-    players.map(function(player) {
-        playerLastNames = player.player.name.last;
-        lower = playerLastNames.toLowerCase().replace(new RegExp(/[èéêë]/g),"e");
-
-        nameArray.push(lower);
-    })
-
-    return nameArray;
-}
-
-// let showSelected = function() {
-//     const playerSelect = document.getElementById('playerSelect');
-//     let selectedPlayer = playerSelect.options[playerSelect.selectedIndex].value;
-
-//     // if(selectedPlayer === )
-
-//     console.log(playerLastName)
-//     console.log(selectedPlayer);
-
-//     return selectedPlayer;
-// }
-
-function handleOnChange() {
-    const playerSelect = document.getElementById('playerSelect');
-    let selectedPlayer = playerSelect.options[playerSelect.selectedIndex].value;
-
-    return selectedPlayer;
-}
-
-function updatePlayerName(data) {
-    const playerName = document.querySelector('.player-name');
-    const text = playerName;
-    let firstName = data.player.name.first;
-    let lastName = data.player.name.last;
-
-    text.innerHTML = `${firstName} ${lastName}`;
-}

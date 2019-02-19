@@ -14,7 +14,7 @@
     <div class="player-card">
 
         <div class="player-card__header">
-            <div class="player-card__header--inner club--tottenham">
+            <div class="player-card__header--inner club club--tottenham">
                 <select class="player-select" id="playerSelect" name="playerSelect">
                     <option value="">Select a player...</option>
                     <option value="mertesacker">Per Mertesacker</option>
@@ -24,7 +24,7 @@
                     <option value="mahrez">Riyad Mahrez</option>
                 </select>
 
-                <img src="images/players/toby-alderweireld.png" alt="" />
+                <img src="images/players/toby-alderweireld.png" id="playerImage" alt="" />
             </div>
         </div>
 
@@ -35,23 +35,23 @@
             <div class="player-stats">
                 <div class="player-stats__item">
                     <span class="player-stats-desc">Appearances</span>
-                    <span class="player-stats-figure">80</span>
+                    <span class="player-stats-figure" id="appearances">80</span>
                 </div>
                 <div class="player-stats__item">
                     <span class="player-stats-desc">Goals</span>
-                    <span class="player-stats-figure">5</span>
+                    <span class="player-stats-figure" id="goals">5</span>
                 </div>
                 <div class="player-stats__item">
                     <span class="player-stats-desc">Assists</span>
-                    <span class="player-stats-figure">2</span>
+                    <span class="player-stats-figure" id="assists">2</span>
                 </div>
                 <div class="player-stats__item">
                     <span class="player-stats-desc">Goals per match</span>
-                    <span class="player-stats-figure">0.06</span>
+                    <span class="player-stats-figure" id="goalsPerMatch">0.06</span>
                 </div>
                 <div class="player-stats__item">
                     <span class="player-stats-desc">Passes per minute</span>
-                    <span class="player-stats-figure">0.26</span>
+                    <span class="player-stats-figure" id="passes">0.26</span>
                 </div>
             </div>
 

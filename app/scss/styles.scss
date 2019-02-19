@@ -7,7 +7,6 @@ body {
 }
 
 .player-card {
-    // border: 1px solid red;
     width: 300px;
 
     .player-card__header {
@@ -33,6 +32,22 @@ body {
                 height: 70px;
                 right: 5px;
                 width: 70px;
+            }
+
+            &.club--spurs:after {
+                background-position: -350px -700px;
+            }
+            &.club--arsenal:after {
+                background-position: -70px -70px;
+            }
+            &.club--man-utd:after {
+                background-position: -420px -560px;
+            }
+            &.club--man-city:after {
+                background-position: -560px -490px;
+            }
+            &.club--leicester:after {
+                background-position: 0 0;
             }
 
             &:before {
