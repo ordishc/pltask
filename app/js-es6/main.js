@@ -26,11 +26,7 @@ xhr.onload = function () {
                         return nameToLower === selectedName;
                     });
 
-                    updatePlayerName(playerStats);
-                    updatePlayerPosition(playerStats);
-                    updatePlayerStats(playerStats);
-                    updatePlayerImage(playerStats);
-                    updatePlayerClub(playerStats);
+                    updateAllStats(playerStats);
                 }
             })
         };
@@ -61,6 +57,14 @@ xhr.onload = function () {
         let selectedPlayer = playerSelect.options[playerSelect.selectedIndex].value;
     
         return selectedPlayer;
+    }
+
+    function updateAllStats(data) {
+        updatePlayerName(data);
+        updatePlayerPosition(data);
+        updatePlayerStats(data);
+        updatePlayerImage(data);
+        updatePlayerClub(data);
     }
     
     function updatePlayerName(data) {
