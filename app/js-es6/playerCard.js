@@ -1,4 +1,4 @@
-let PlayerCard = (function() {
+const PlayerCard = (() => {
 	'use strict';
 
 	const DOM = {
@@ -8,11 +8,11 @@ let PlayerCard = (function() {
 			playerPos: '.player-position',
 			playerImage: 'playerImage',
 			playerClub: '.club',
-			playerAppearances: 'appearances',
-			playerGoals: 'goals',
-			playerAssists: 'assists',
-			playerGoalsPerMatch: 'goalsPerMatch',
-			playerPasses: 'passes',
+			playerAppearances: '.appearances',
+			playerGoals: '.goals',
+			playerAssists: '.assists',
+			playerGoalsPerMatch: '.goalsPerMatch',
+			playerPasses: '.passes',
 			dropDown: 'playerSelect'
 		}
 	};
@@ -24,11 +24,11 @@ let PlayerCard = (function() {
 		DOM.$playerPos = document.querySelector(DOM.selectors.playerPos);
 		DOM.$playerImage = document.getElementById(DOM.selectors.playerImage);
 		DOM.$playerClub = document.querySelector(DOM.selectors.playerClub);
-		DOM.$appearances = document.getElementById(DOM.selectors.playerAppearances);
-		DOM.$goals = document.getElementById(DOM.selectors.playerGoals);
-		DOM.$assists = document.getElementById(DOM.selectors.playerAssists);
-		DOM.$goalsPerMatch = document.getElementById(DOM.selectors.playerGoalsPerMatch);
-		DOM.$passes = document.getElementById(DOM.selectors.playerPasses);
+		DOM.$appearances = document.querySelector(DOM.selectors.playerAppearances);
+		DOM.$goals = document.querySelector(DOM.selectors.playerGoals);
+		DOM.$assists = document.querySelector(DOM.selectors.playerAssists);
+		DOM.$goalsPerMatch = document.querySelector(DOM.selectors.playerGoalsPerMatch);
+		DOM.$passes = document.querySelector(DOM.selectors.playerPasses);
 		DOM.$playerSelect = document.getElementById(DOM.selectors.dropDown);
 	}
 
@@ -46,9 +46,9 @@ let PlayerCard = (function() {
 					let selectedName = handleOnChange();
 					let playerStats;
 					
-					playerLastName.forEach(function(name) {
+					playerLastName.forEach(name => {
 						if (name === selectedName) {
-							playerStats = players.find(function(element) {
+							playerStats = players.find(element => {
 								let name = element.player.name.last
 								let nameToLower = name.toLowerCase().replace(new RegExp(/[èéêë]/g),"e");
 
@@ -61,7 +61,8 @@ let PlayerCard = (function() {
 				};
 
 			} else {
-				// Would handle request error here
+				// Handle request error here
+				// Would show some sort of error message
 				console.log('The request failed!');
 			}
 		};
@@ -74,7 +75,7 @@ let PlayerCard = (function() {
 			lowerCaseNames,
 			nameArray = [];
 	
-		players.map(function(player) {
+		players.map(player => {
 			playerLastNames = player.player.name.last;
 			lowerCaseNames = playerLastNames.toLowerCase().replace(new RegExp(/[èéêë]/g),"e");
 	
@@ -99,21 +100,23 @@ let PlayerCard = (function() {
 	}
 	
 	function updatePlayerName(data) {
-		let firstName = data.player.name.first,
+		const firstName = data.player.name.first,
 			lastName = data.player.name.last;
 	
 		DOM.$playerName.innerHTML = `${firstName} ${lastName}`;
 	}
 	
 	function updatePlayerPosition(data) {
-		let positionData = data.player.info.positionInfo,
+		const positionData = data.player.info.positionInfo,
 			positionString = positionData.split(' ').slice(-1).toString(); //Strip last word from JSON data
 	
 		DOM.$playerPos.innerHTML = positionString;
 	}
 
 	function updatePlayerImage(data) {
-		let firstName = data.player.name.first.toLowerCase().replace(new RegExp(/[èéêë]/g),"e"),
+		// Regex is removing e's with any accent (Eg. Toure) (would need more for other players)
+		// Would create a function to handle all scenarios
+		const firstName = data.player.name.first.toLowerCase().replace(new RegExp(/[èéêë]/g),"e"),
 			lastName = data.player.name.last.toLowerCase().replace(new RegExp(/[èéêë]/g),"e"),
 			newImageName = `${firstName}-${lastName}`,
 			imagePath = `images/players/${newImageName}.png`;
@@ -122,7 +125,7 @@ let PlayerCard = (function() {
 	}
 
 	function updatePlayerClub(data) {
-		let playerClubFull = data.player.currentTeam.shortName,
+		const playerClubFull = data.player.currentTeam.shortName,
 			playerClubShort = playerClubFull.toLowerCase().replace(' ', '-'),
 			classList = DOM.$playerClub.classList,
 			currentClass = classList[2],
@@ -133,7 +136,7 @@ let PlayerCard = (function() {
 	}
 	
 	function updatePlayerStats(data) {	
-		let appearanceStat = findStatsOfIndividual(data, 'appearances'),
+		const appearanceStat = findStatsOfIndividual(data, 'appearances'),
 			goalsStat = findStatsOfIndividual(data, 'goals'),
 			assistStat = findStatsOfIndividual(data, 'goal_assist'),
 			goalsAverage = goalsStat / appearanceStat,
@@ -149,15 +152,12 @@ let PlayerCard = (function() {
 		DOM.$goalsPerMatch.innerHTML = goalsAverage.toFixed(2); // Round maths to 2 decimal places
 		DOM.$passes.innerHTML = passPerMinute.toFixed(2) // Round maths to 2 decimal places
 	}
-	
-	function findStatsOfIndividual(data, stat) {
-		let allStatsData = data.stats,
-			playerStats = allStatsData.find(function(stats) {
 
-				return stats.name === stat;
-			});
-	
-		// Handle error is stat doesn't exist (Eg. Mertesacker has no goal assist)
+	function findStatsOfIndividual(data, stat) {
+		const allStatsData = data.stats,
+			playerStats = allStatsData.find(stats => stats.name === stat);
+
+		// Handle error if stat doesn't exist (Eg. Mertesacker has no goal assist)
 		if (!playerStats) {
 			return 0;
 		} else {
@@ -173,4 +173,4 @@ let PlayerCard = (function() {
 	return {
 		init: init
 	};
-}());
+})();

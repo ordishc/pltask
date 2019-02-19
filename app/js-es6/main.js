@@ -1,3 +1,3 @@
 document.addEventListener("DOMContentLoaded",function() {
-    PlayerCard.init();
+	PlayerCard.init();
 });
