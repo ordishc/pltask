@@ -32,6 +32,7 @@ const PlayerCard = (() => {
 		DOM.$playerSelect = document.getElementById(DOM.selectors.dropDown);
 	}
 
+	// Need to Refactor and pass data to new method
 	function retrieveData() {
 		const xhr = new XMLHttpRequest();
 
