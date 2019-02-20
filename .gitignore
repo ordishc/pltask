@@ -1,6 +1,6 @@
 node_modules
 
 # Folders created with gulp
-app/js
-app/css
+app/public/js
+app/public/css
 dist

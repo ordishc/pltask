@@ -1,29 +1,29 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
-var useref = require('gulp-useref');
-var uglify = require('gulp-uglify');
-var gulpIf = require('gulp-if');
-var cssnano = require('gulp-cssnano');
-var del = require('del');
-var runSequence = require('run-sequence');
-var babel = require('gulp-babel');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const browserSync = require('browser-sync').create();
+const useref = require('gulp-useref');
+const uglify = require('gulp-uglify');
+const gulpIf = require('gulp-if');
+const cssnano = require('gulp-cssnano');
+const del = require('del');
+const runSequence = require('run-sequence');
+const babel = require('gulp-babel');
 
 gulp.task('sass', function() {
-	return gulp.src('app/scss/**/*.scss')
+	return gulp.src('app/src/scss/**/*.scss')
 		.pipe(sass())
-		.pipe(gulp.dest('app/css'))
+		.pipe(gulp.dest('app/public/css'))
 		.pipe(browserSync.reload({
 			stream: true
 		}))
 });
 
 gulp.task('scripts', function() {
-    return gulp.src('app/js-es6/**/*.js')
+	return gulp.src('app/src/js-es6/**/*.js')
 		.pipe(babel({
 			presets: ['@babel/preset-env']
 		}))
-		.pipe(gulp.dest('app/js'))
+		.pipe(gulp.dest('app/public/js'))
 		.pipe(browserSync.reload({
 			stream: true
 		}))
@@ -32,19 +32,19 @@ gulp.task('scripts', function() {
 gulp.task('browserSync', function() {
 	browserSync.init({
 		server: {
-			baseDir: 'app'
+			baseDir: 'app/public'
 		},
 	})
 });
 
 gulp.task('fonts', function() {
-	return gulp.src('app/fonts/**/*')
+	return gulp.src('app/public/fonts/**/*')
 		.pipe(gulp.dest('dist/fonts'))
 });
 
 // Create site directory
 gulp.task('useref', function(){
-	return gulp.src('app/*.html')
+	return gulp.src('app/public/*.html')
 		.pipe(useref())
 		.pipe(gulpIf('*.js', uglify())) // Minify if JS file
 		.pipe(gulpIf('*.css', cssnano())) // Minify is CSS file
@@ -67,9 +67,9 @@ gulp.task('build', function (callback) {
 });
 
 gulp.task('watch', gulp.parallel('browserSync', 'sass', 'scripts', function() {
-	gulp.watch('app/scss/**/*.scss', gulp.series('sass')); 
-	gulp.watch('app/*.html').on('change', browserSync.reload);
-	gulp.watch('app/js-es6/**/*.js', gulp.series('scripts')); 
+	gulp.watch('app/src/scss/**/*.scss', gulp.series('sass')); 
+	gulp.watch('app/src/*.html').on('change', browserSync.reload);
+	gulp.watch('app/src/js-es6/**/*.js', gulp.series('scripts')); 
 }));
 
 // Temporary dev build to make sure latest scripts and styling up to date
