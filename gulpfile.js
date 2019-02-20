@@ -68,7 +68,7 @@ gulp.task('build', function (callback) {
 
 gulp.task('watch', gulp.parallel('browserSync', 'sass', 'scripts', function() {
 	gulp.watch('app/src/scss/**/*.scss', gulp.series('sass')); 
-	gulp.watch('app/src/*.html').on('change', browserSync.reload);
+	gulp.watch('app/public/*.html').on('change', browserSync.reload);
 	gulp.watch('app/src/js-es6/**/*.js', gulp.series('scripts')); 
 }));
 

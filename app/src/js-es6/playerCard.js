@@ -116,6 +116,7 @@ const PlayerCard = (() => {
 	function updatePlayerImage(data) {
 		// Regex is removing e's with any accent (Eg. Toure) (would need more for other players)
 		// Would create a function to handle all scenarios
+		// Would also update image alt text in this method - TODO
 		const firstName = data.player.name.first.toLowerCase().replace(new RegExp(/[èéêë]/g),"e"),
 			lastName = data.player.name.last.toLowerCase().replace(new RegExp(/[èéêë]/g),"e"),
 			newImageName = `${firstName}-${lastName}`,

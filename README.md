@@ -14,7 +14,7 @@ A step by step series of examples that tell you how to get a development env run
 * Run 'gulp build:dev' in the terminal and the site should spin up, if not head to localhost:3000
 ```
 
-Another gulp task added is watch. This task watch the scss files and es6 files. When developing if you save one of these files it will automatically update the correct folders in the 'public' folder and refresh the browser with your changes.
+Another gulp task added is watch. This task watches the scss files and es6 files. When developing if you save one of these files it will automatically update the correct folders in the 'public' folder and refresh the browser with your changes.
 
 ```
 * Run 'gulp watch'
@@ -29,6 +29,5 @@ Another gulp task added is watch. This task watch the scss files and es6 files. 
 
 ### Given more time I would
 
-* Use postCSS to use the autoprefixer
 * Write unit tests
 * Add image minification
